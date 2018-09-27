@@ -265,7 +265,7 @@ export class WinningHand extends Hand{
 }
 
 export enum Suit {
-    HEARTH,
+    HEARTS,
     SPADE,
     DIAMOND,
     CLUB
