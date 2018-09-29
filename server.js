@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 
+const port = 1337;
+
 app.use('/node_modules', express.static('node_modules'));
-app.use('/', express.static('app'));
-app.listen(1337, () => console.log(
-    'Express server running at http://127.0.0.1:1337'));
+app.use('/', express.static('public'));
+app.listen(port, () => console.log(
+    `Express server running at http://locahost:${port}`));
