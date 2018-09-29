@@ -1,3 +1,5 @@
+import { Suit, Rank, HandRank } from './constants.js';
+
 export class Card {
 
     private static suits: string[] = [ 'h', 's', 'd', 'c' ];
@@ -40,7 +42,7 @@ export class Card {
         return new Card(rank, suit);
     }
 }
-
+/*
 // the Hand class contains the player cards + board cards.
 export class Hand {
     public cards: Card[] = [];
@@ -262,40 +264,7 @@ export class WinningHand extends Hand{
     calculateRanks(rank: HandRank){
         // TODO
     }
-}
+}*/
 
-export enum Suit {
-    HEARTS,
-    SPADE,
-    DIAMOND,
-    CLUB
-}
-
-export enum Rank {
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING,
-    ACE
-}
-
-export enum HandRank {
-    HIGH_CARD,
-    PAIR,
-    DOUBLE_PAIR,
-    SET,
-    STRAIGHT,
-    FLUSH,
-    FULL_HOUSE,
-    FOUR_OF_A_KIND,
-    STRAIGHT_FLUSH,
-    ROYAL_FLUSH,
-}
+let testCard = new Card(Rank.EIGHT, Suit.CLUB);
+console.log("test2" + Suit.CLUB + "-" + testCard);
