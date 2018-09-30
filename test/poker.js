@@ -1,16 +1,17 @@
-var Card = require('../public/build/card.js');
-let Constants = require('../public/build/constants.js');
-let chai = require('chai');
+import { Card } from '../public/build/card.js';
+import { Rank, Suit } from '../public/build/constants.js';
+import chai from 'chai';
 let should = chai.should();
 
 describe('Cards', function() {
 
   it('should make a new card given a rank and suit', function(done) {
-      console.log("test " + Object.values(Card));
-    let testCard = new Card(Constants.Rank.FIVE, Constants.Suit.HEARTS);
+    console.log("test " + Card);
+    var testCard = new Card(Rank.FIVE, Suit.HEARTS);
     testCard.should.be.a("object");
     testCard.should.have.property('rank');
     testCard.rank.should.be.a("number");
+    done();
   });
  
 });
