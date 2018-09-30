@@ -1,5 +1,5 @@
 export enum Suit {
-    HEARTS,
+    HEART,
     SPADE,
     DIAMOND,
     CLUB
