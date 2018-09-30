@@ -1,6 +1,6 @@
 import { Rank, Suit } from './constants.js';
 
-export class Card {
+export default class Card {
 
     /* Where possible, it's nice to have constants like suits and ranks defined in only one place. 
     The arrays defined here previously have the advantage of being short-hand names, but if we really 
