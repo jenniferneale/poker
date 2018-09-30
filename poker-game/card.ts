@@ -37,9 +37,9 @@ export class Card {
         let splits = str.split(Card.delim);
         if (splits.length !== 2)
             throw Error('Card length should be 2 words, delimited by -');
-        
-        const rank = Card.ranks.findIndex(x => x === splits[0]);
-        const suit = Card.suits.findIndex(x => x === splits[1]);
+        // findIndex is a bit silly when we are using enums
+        const rank: Rank = (<any>Rank)[splits[0]];
+        const suit: Suit = (<any>Suit)[splits[1]];
 
         if (rank === -1 || suit === -1)
             throw Error(`Rank ${str[0]} or suit ${str[1]} was not found`);
