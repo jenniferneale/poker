@@ -3,9 +3,21 @@ import Hand from './hands/hand.js';
 import WinningHand from './hands/winningHand';
 import { Rank, HandRank } from './constants.js';
 
+/* It's not clear why this is an object that needs to be instantiated separately from the Hand. 
+ There are no data points being stored here, really. 
+ The evaluateHand function could belong to the Hand, and then refer to a collection of constant functions.
+ */
 export default class HandEvaluator {
 
     evaluateHand(hand: Hand): WinningHand {
+        if (hand.cards.length < 7)
+            throw new Error('When evaluating a hand, the hand must have 7 cards');
+        
+        /* When I see a list like this, I usually try to see if I can use a switch instead. 
+            In this case, an if-else chain is maybe fine, but the structure is a bit odd. 
+            It's also a shame to calculate straight flush twice, once for royal, and again for regular. 
+            Or how Double Pair calculates the first pair, and then you calculate the first pair again for [single] Pair.
+         */
         let winningCards: Card[] | undefined;
         if (winningCards = this.evaluateRoyalFlush(hand))
             return new WinningHand(winningCards, HandRank.ROYAL_FLUSH);
@@ -27,14 +39,6 @@ export default class HandEvaluator {
             return new WinningHand(winningCards, HandRank.PAIR);
         else
             return new WinningHand(this.findHighests(5, hand.cards), HandRank.HIGH_CARD);
-         
-        /*if(winningCards)
-         switch(winningCards) {
-            case this.evaluateRoyalFlush(hand):
-                return new WinningHand(winningCards, HandRank.ROYAL_FLUSH);
-            default:
-                return new WinningHand(this.findHighests(5, hand.cards), HandRank.HIGH_CARD);
-        }*/
     }
 
     evaluateRoyalFlush(hand: Hand): Card[] | undefined {
