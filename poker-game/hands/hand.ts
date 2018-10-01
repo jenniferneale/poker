@@ -1,7 +1,5 @@
 import { Rank, HandRank } from '../constants.js';
 import Card from '../card.js';
-import HandEvaluator from '../handEvaluator.js';
-import WinningHand from './winningHand.js';
 
 // the Hand class contains the player cards + board cards.
 export default class Hand {
@@ -35,16 +33,10 @@ export default class Hand {
         return this;
     }
 
-    evaluateHand(): WinningHand {
-        // in hold'em poker there is 5 cards on board + 2 cards in hand.
-        // for convenience, the Hand class contains the board cards as well
-        if (this.cards.length < 7)
-            throw new Error('When evaluating a hand, the hand must have 7 cards');
-
-        // Added link to HandEvaluator to return the WinningHand (best 5 cards of these 7)
-        let handEval: HandEvaluator = new HandEvaluator();
-        return handEval.evaluateHand(this);
-    }
+    /* I removed evaluateHand from the Hand class so as to 
+        avoid circular references, and to have just one 
+        location for the evaluateHand function (in HandEvaluator).
+    */
 
     // Check if hand contains one or more of the given Rank
     hasRank(rank: Rank) {
