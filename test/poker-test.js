@@ -1,7 +1,8 @@
 import Card from '../public/build/card.js';
-import Hand from '../public/build/hand.js';
+import Hand from '../public/build/hands/hand.js';
 import { Rank, Suit } from '../public/build/constants.js';
 import chai from 'chai';
+import HandEvaluator from '../public/build/handEvaluator.js';
 let should = chai.should();
 
 describe('Cards', function() {
@@ -53,3 +54,17 @@ describe('Hands', function() {
       done();
     })
 });
+
+describe('HandEvaluator', function() {
+
+  it('should identify different kinds of winning hands', function(done) {
+    let testString = "SEVEN-DIAMOND SIX-HEART EIGHT-SPADE JACK-SPADE NINE-DIAMOND TEN-DIAMOND ACE-SPADE";
+    let testHand = Hand.fromString(testString);
+    let testEvaluator = new HandEvaluator();
+    should.equal(testEvaluator.evaluateFourOfAKind(testHand), undefined);
+    let straightTestResult = "SIX-HEART SEVEN-DIAMOND EIGHT-SPADE JACK-SPADE NINE-DIAMOND TEN-DIAMOND ";
+    //console.log("straight " + testEvaluator.evaluateStraight(testHand));
+    //console.log("eval " + testHand.evaluateHand());
+    done();
+  })
+})
