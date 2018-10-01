@@ -57,14 +57,14 @@ describe('Hands', function() {
 
 describe('HandEvaluator', function() {
 
-  it('should identify different kinds of winning hands', function(done) {
+  it('should identify winning hands', function(done) {
     let testString = "SEVEN-DIAMOND SIX-HEART EIGHT-SPADE JACK-SPADE NINE-DIAMOND TEN-DIAMOND ACE-SPADE";
     let testHand = Hand.fromString(testString);
     let testEvaluator = new HandEvaluator();
     should.equal(testEvaluator.evaluateFourOfAKind(testHand), undefined);
-    let straightTestResult = "SIX-HEART SEVEN-DIAMOND EIGHT-SPADE JACK-SPADE NINE-DIAMOND TEN-DIAMOND ";
-    //console.log("straight " + testEvaluator.evaluateStraight(testHand));
-    //console.log("eval " + testHand.evaluateHand());
+    let straightTestResult = "JACK-SPADE TEN-DIAMOND NINE-DIAMOND EIGHT-SPADE SEVEN-DIAMOND";
+    should.equal(new Hand(testEvaluator.evaluateStraight(testHand)).toString(), straightTestResult);
+    should.equal(testEvaluator.evaluateHand(testHand).toString(), straightTestResult);
     done();
   })
 })
