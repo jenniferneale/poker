@@ -4,20 +4,21 @@ export default class Card {
 
     /* Where possible, it's nice to have constants like suits and ranks defined in only one place. 
     The arrays defined here previously have the advantage of being short-hand names, but if we really 
-    needed these, it would be preferable to include those as part of the suit and rank collection objects. */
-    private static suits: string[] = Object.keys(Suit).filter(k => typeof Suit[k as any] === "number");
-    private static ranks: string[] = Object.keys(Rank).filter(k => typeof Rank[k as any] === "number");
+    needed these, it would be preferable to include those as part of the suit and rank collection objects. 
+    As it is, we're making this list every time we make a new card, which is redundant. */
     private static delim: string = "-";
 
     constructor(private _rank: Rank, private _suit: Suit) {
-        if (this._rank >= Card.ranks.length)
+        // These checks might be better like Card.ranks.indexOf(this._rank) != -1, 
+        // which is more precise, but this comparison works too.
+        if (this._rank >= Object.keys(Rank).length / 2)
             throw Error('A rank must be 0 and 12. ( Ace to king)');
-        if (this._suit >= Card.suits.length)
+        if (this._suit >= Object.keys(Suit).length / 2)
             throw Error('A suit must be between 0 and 3 (h, s, d, c)')
     }
 
     toString() {
-        return Card.ranks[this._rank] + Card.delim + Card.suits[this._suit];
+        return Rank[this._rank] + Card.delim + Suit[this._suit];
     }
 
     static sortFn(a: Card, b: Card) {
